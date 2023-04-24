@@ -7,12 +7,14 @@ tensorboard*
 Pavia_Downsampled*
 resultspsnrsensor*
 plot*
-Experiments*
+
 Descargas*
-Results*
+Results_GPU
+results
 test*
 cosi*
 figure*
 dataresults*
 logs*
 pytorch*
+Experiments_scripts
