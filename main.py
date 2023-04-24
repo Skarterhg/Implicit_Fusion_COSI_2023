@@ -16,10 +16,6 @@ import cv2 as cv
 import argparse
 import torch.nn
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--cover", type=float, default=-0.0, help="cover of the experiment")
-config = parser.parse_args()
-
 imagen_cargar = "pavia"
 
 if imagen_cargar == "pavia":
@@ -41,7 +37,6 @@ I =cv.resize(I,(128,128))
 
 data_path = I
 size=(data_path.shape[0],data_path.shape[1])
-#data_path = os.path.join("Train Images", "gato.jpeg")
 debug = False
 
 if debug:
@@ -49,9 +44,6 @@ if debug:
 else:
     results_path =  os.path.join("new_range_results_pavia_lowerpe", "cover_results","optim_parameters")
 
-#BATCH_SIZE = 2**14
-#if debug:
- #   BATCH_SIZE = 2**10
 
 SHUFFLE = False
 nro_bandas=I.shape[-1]
@@ -60,7 +52,12 @@ layer_output=512
 num_layers=21 
 w_0=30
 learning_rate = 1e-6#optimalvalue
-stdpe=0.7#1.8207963267948966
+
+PEuse=False
+if PEuse:
+    stdpe=1.8207963267948966
+else:
+    stdpe=-1
 
 n_epochs = 120
 steps_per_epoch = None
@@ -78,7 +75,7 @@ numberofbands=nro_bandas
 
 lamb1 = 400
 lamb2 = 2500
-porcentaje = config.cover
+porcentaje = 0.2
 wvcut = (lamb2-lamb1)/2*porcentaje
 middle = 800#(lamb2+lamb1)/2
 
